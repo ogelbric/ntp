@@ -128,9 +128,11 @@ vmware-system-user@miniocluster-node-pool-1-xblpt-5dd9f8899d-5pbdx [ ~ ]$ cat /e
 server 10.128.243.14 iburst
 ```
 It is changed!
+Outcome so far the workload network NTP change triggered all clusters created with out a NTP setting to be re-paved. 
 
 # The next question is what happens when the workload NTP IP is changed and there is a NTP setting in the cluster create yaml file?
 
+I am deleting my minio cluster and creating it with a granular NTP setting in the YAML file 
 
 
 
