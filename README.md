@@ -22,6 +22,8 @@ ServerAddress=10.62.4.1
 
 Now I am changing the IP in the vCenter GUI. 
 
+![GitHub](mtgchange1.png)
+
 
 After about ~45seconds the change is propagated to the supervisor nodes.
 
