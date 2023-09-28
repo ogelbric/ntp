@@ -119,6 +119,23 @@ namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wmtx6   poweredOn   
 
 After a while this will normalize 
 
+Jumping onto the guestcluster again and checking the NTP IP:
+
+```
+vmware-system-user@miniocluster-node-pool-1-xblpt-5dd9f8899d-5pbdx [ ~ ]$ cat /etc/chrony.conf | grep server
+# Use public servers from the pool.ntp.org project.
+# servers
+server 10.128.243.14 iburst
+```
+It is changed!
+
+# The next question is what happens when the workload NTP IP is changed and there is a NTP setting in the cluster create yaml file?
+
+
+
+
+
+
 
 
 
