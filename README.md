@@ -195,7 +195,8 @@ spec:
           storageClass: pacific-gold-storage-policy
 ```
 
-Notice the NTp section and I am looking at google for time. 
+Notice the NTP section and I am looking at google for time. 
+
 
 
 
