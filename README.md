@@ -90,6 +90,11 @@ Changing the NTP IP on the workload network:
 
 ![GitHub](guestclusterntpchange1.png)
 
+After 3-4 minutes the first guescluster gets re-paved.  
+Notice it does the control plane and the worker node at the same time (have lots of IP address in the pool open!) 
+
+![GitHub](guestclusterrepave1.png)
+
 
 
 
