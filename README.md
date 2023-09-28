@@ -36,6 +36,7 @@ ServerAddress=10.128.152.81
 ```
 
 # The next question is what happens when the workload NTP IP is changed?
+# What happens to the workload clusters (* here cluster was not created with NTP settings in the yaml file! more on that further down) 
 
 I have currenly 2 clusters ( I am on the supervisor controll plane): 
 
@@ -74,6 +75,13 @@ chmod 600 test-cluster-ssh-key
 ssh -i test-cluster-ssh-key vmware-system-user@192.168.3.105
 ```
 Lets find the current NTP setting: 
+
+```
+vmware-system-user@miniocluster-node-pool-1-xblpt-64f896dcb-8sdkm [ /etc ]$ cat /etc/chrony.conf | grep server
+# Use public servers from the pool.ntp.org project.
+# servers
+server 10.62.4.1 iburst
+```
 
 
 
