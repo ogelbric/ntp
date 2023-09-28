@@ -70,6 +70,7 @@ Generating ssh key and jumping onto the guestcluster node:
 
 ```
 kubectl get  secret -n namespace1000  miniocluster-ssh -o jsonpath='{.data.ssh-privatekey}' | base64 -d > test-cluster-ssh-key
+chmod 600 test-cluster-ssh-key
 ssh -i test-cluster-ssh-key vmware-system-user@192.168.3.105
 ```
 Lets find the current NTP setting: 
