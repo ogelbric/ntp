@@ -98,7 +98,24 @@ Notice it does the control plane and the worker node at the same time (have lots
 
 When the fisrt cluster is done re-paving the second cluster gets re-paved with the new NTP information
 
+The second cluster is being worked on now as well
 
+```
+root@4223a1b0a09ff5f75249d31b10f724a1 [ /etc ]# kubectl get virtualmachines -A
+NAMESPACE       NAME                                                POWER-STATE   AGE
+namespace1000   miniocluster-l95rz-5b729                            poweredOn     22h
+namespace1000   miniocluster-l95rz-c64n2                            poweredOn     9m7s
+namespace1000   miniocluster-node-pool-1-xblpt-5dd9f8899d-5pbdx     poweredOn     9m10s
+namespace1000   miniocluster-node-pool-1-xblpt-64f896dcb-8sdkm      poweredOn     22h
+namespace1000   tmclocalcluster-db9s7-l4r2n                         poweredOn     22h
+namespace1000   tmclocalcluster-db9s7-vhlm5                         poweredOn     9m8s
+namespace1000   tmclocalcluster-node-pool-1-w28f7-5648bc494-l8jk8   poweredOn     9m10s
+namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-759hj   poweredOn     21h
+namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wc449   poweredOn     21h
+namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wmtx6   poweredOn     22h
+```
+
+![GitHub](guestclusterrepave2.png)
 
 
 
