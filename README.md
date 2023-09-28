@@ -40,7 +40,7 @@ ServerAddress=10.128.152.81
 
 I have currenly 2 clusters ( I am on the supervisor controll plane): 
 
-![GitHub](guestcluster1.png)
+![GitHub](guestclusters1.png)
 
 
 
