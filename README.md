@@ -117,6 +117,9 @@ namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wmtx6   poweredOn   
 
 ![GitHub](guestclusterrepave2.png)
 
+After a while this will normalize 
+
+
 
 
 
