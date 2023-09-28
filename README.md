@@ -8,7 +8,7 @@ They are in the supervisor section under management and workload networks.
 
 ![GitHub](guest1.png)
 
-The question is what happens when the management NTP IP is changed. 
+# The question is what happens when the management NTP IP is changed. 
 
 Loggin onto the super visor node we see the current IP is 10.62.4.1
 
