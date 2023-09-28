@@ -58,6 +58,25 @@ namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-759hj   poweredOn   
 namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wc449   poweredOn     21h
 namespace1000   tmclocalcluster-node-pool-1-w28f7-99556fbd9-wmtx6   poweredOn     21h
 ```
+Getting IP of a Node: 
+
+```
+root@4223a1b0a09ff5f75249d31b10f724a1 [ ~ ]# kubectl  -n namespace1000 get virtualmachine  miniocluster-node-pool-1-xblpt-64f896dcb-8sdkm  -o jso
+npath='{.status.vmIp}'
+192.168.3.105
+```
+
+Generating ssh key and jumping onto the guestcluster node: 
+
+```
+kubectl get  secret -n namespace1000  miniocluster-ssh -o jsonpath='{.data.ssh-privatekey}' | base64 -d > test-cluster-ssh-key
+ssh -i test-cluster-ssh-key vmware-system-user@192.168.3.105
+```
+Lets find the current NTP setting: 
+
+
+
+
 
 
 
