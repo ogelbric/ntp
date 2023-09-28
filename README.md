@@ -40,6 +40,10 @@ ServerAddress=10.128.152.81
 
 I have currenly 2 clusters ( I am on the supervisor controll plane): 
 
+![GitHub](guestcluster1.png)
+
+
+
 ```
 root@4223a1b0a09ff5f75249d31b10f724a1 [ ~ ]# k get clusters -A
 NAMESPACE       NAME              PHASE         AGE   VERSION
@@ -82,6 +86,10 @@ vmware-system-user@miniocluster-node-pool-1-xblpt-64f896dcb-8sdkm [ /etc ]$ cat 
 # servers
 server 10.62.4.1 iburst
 ```
+Changing the NTP IP on the workload network: 
+
+![GitHub](guestclusterntpchange1.png)
+
 
 
 
