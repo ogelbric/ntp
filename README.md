@@ -10,5 +10,18 @@ They are in the supervisor section under management and workload networks.
 
 The question is what happens when the management NTP IP is changed. 
 
+Loggin onto the super visor node we see the current IP is 10.62.4.1
+
+```
+timedatectl show-timesync
+LinkNTPServers=10.62.4.1
+FallbackNTPServers=0.vmware.pool.ntp.org 1.vmware.pool.ntp.org 2.vmware.pool.ntp.org 3.vmware.pool.ntp.org
+ServerName=10.62.4.1
+ServerAddress=10.62.4.1
+```
+
+Now I am changing the IP in the vCenter GUI. 
+
+
 
 
