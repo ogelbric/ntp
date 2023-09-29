@@ -1,4 +1,4 @@
-# NTP in Tanzu and how the IP settings can propergate when a change is needed (vCenter 8u2)
+# NTP in Tanzu and how the IP settings can propergate when a change is needed (vCenter 8u2/apiVersion: cluster.x-k8s.io/v1beta1)
 
 In vCenter there are 2 places with in the supervisor cluster to hchange the NTP settings for the kubernetes clusters (supervisor/guest clusters) 
 
