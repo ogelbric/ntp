@@ -141,7 +141,7 @@ k delete -f ./miniocluster_no_ntp.yaml
 k apply -f ./miniocluster.yaml
 ```
 
-THe yaml file looks like this:
+The yaml file looks like this:
 
 ```
 ---
