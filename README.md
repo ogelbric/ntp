@@ -158,6 +158,24 @@ The yaml file has a section for the worker like this:
 
 Notice the NTP section and I am looking at ntp.org for time. 
 
+The ntp override has been applied to the workers (right now only the workers can be changed from the default) 
+
+```
+k describe cluster miniocluster       | grep ntp -w2
+        Name:           localvolume
+        Storage Class:  pacific-gold-storage-policy
+      Name:             ntp
+      Value:            10.128.243.14
+      Name:             storageClass
+--
+        Variables:
+          Overrides:
+            Name:   ntp
+            Value:  0.pool.ntp.org
+
+```
+
+
 
 
 
