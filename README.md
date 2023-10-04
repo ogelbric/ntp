@@ -141,61 +141,22 @@ k delete -f ./miniocluster_no_ntp.yaml
 k apply -f ./miniocluster.yaml
 ```
 
-The yaml file looks like this:
+The yaml file has a section for the worker like this:
 
 ```
 ---
-apiVersion: cluster.x-k8s.io/v1beta1
-kind: Cluster
-metadata:
-  name: miniocluster
-  namespace: namespace1000
-spec:
-  clusterNetwork:
-    services:
-      cidrBlocks: ["10.96.0.0/12"]
-    pods:
-      cidrBlocks: ["192.167.0.0/16"]
-    serviceDomain: "cluster.local"
-  topology:
-    class: tanzukubernetescluster
-    version: v1.23.8---vmware.2-tkg.2-zshippable
-    controlPlane:
-      replicas: 1
-    variables:
-      - name: vmClass
-        value: best-effort-xsmall 
     workers:
       machineDeployments:
         - class: node-pool
           name: node-pool-1
           replicas: 1
-    variables:
-      - name:  ntp
-        value: "time.google.com"
-      - name: vmClass
-        value: best-effort-xsmall 
-      - name: storageClass
-        value: pacific-gold-storage-policy
-      - name: defaultStorageClass
-        value: pacific-gold-storage-policy
-      - name: nodePoolVolumes
-        value:
-        - capacity:
-            storage: "10Gi"
-          mountPath: "/data"
-          name: localvolume
-          storageClass: pacific-gold-storage-policy
-      - name: controlPlaneVolumes
-        value:
-        - capacity:
-            storage: "4Gi"
-          mountPath: "/var/lib/etcd"
-          name: etcd
-          storageClass: pacific-gold-storage-policy
+          variables:
+            overrides:
+            - name:  ntp
+              value: "0.pool.ntp.org"
 ```
 
-Notice the NTP section and I am looking at google for time. 
+Notice the NTP section and I am looking at ntp.org for time. 
 
 
 
