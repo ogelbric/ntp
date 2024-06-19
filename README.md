@@ -347,8 +347,17 @@ System clock synchronized: yes
 ```
 
 
+![GitHub](ntp1.png)
 
+![GitHub](ntp2.png)
 
+![GitHub](ntp3.png)
+
+![GitHub](ntp4.png)
+
+![GitHub](ntp5.png)
+
+![GitHub](ntp6.png)
 
 
 
