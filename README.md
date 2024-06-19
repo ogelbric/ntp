@@ -176,7 +176,175 @@ k describe cluster miniocluster       | grep ntp -w2
 ```
 
 
+# NTP investigation on ESXi servers
 
+```
+#!/bin/bash
+#
+# ntp investigtion
+# yum install sshp
+# https://www.cloudhba.com/NTP-troubleshooting-on-ESXi-host/
+#
+declare -a list=("192.168.3.51" "192.168.3.52" "192.168.3.53")
+line='--------------------------------------------------------'
+#
+for host in "${list[@]}"
+do 
+  echo $line
+  echo $host
+  echo $line
+  sshpass -p 'mypassword' ssh root@$host "ntpq -p" >  /tmp/a.txt
+  cat /tmp/a.txt
+  export cnt=`cat /tmp/a.txt | tail -1  | awk '{print $7}'`
+  export cnt1=`echo "obase=2; $cnt" | bc `
+  export cnt2=`echo "obase=2; $cnt" | bc |  awk -F1 '{print NF-1}'`
+  echo "Reach value:        " $cnt
+  echo "Reach value binary: " $cnt1
+  echo $cnt2 " out of 8 connections to the NTP server worked"
+done
+rm /tmp/a.txt
+```
+
+Outcome: 
+
+```
+--------------------------------------------------------
+192.168.3.51
+--------------------------------------------------------
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ time3.oc.vmware 10.66.37.81      3 u  264 1024    3    0.476   +2.498   2.331
+Reach value:         3
+Reach value binary:  11
+2  out of 8 connections to the NTP server worked
+--------------------------------------------------------
+192.168.3.52
+--------------------------------------------------------
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+*time3.oc.vmware 10.66.37.81      3 u   43  128  377    0.545  +53.967  21.963
+Reach value:         377
+Reach value binary:  101111001
+6  out of 8 connections to the NTP server worked
+--------------------------------------------------------
+192.168.3.53
+--------------------------------------------------------
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+*ntp3-eat1.vmwar 10.66.37.81      3 u  598 1024   77    0.667  +163.33 120.686
+Reach value:         77
+Reach value binary:  1001101
+4  out of 8 connections to the NTP server worked
+```
+
+# NTP investigation on a workload cluster
+
+```
+#!/bin/bash
+#
+# ntp worker node investigtion
+# https://www.cloudhba.com/NTP-troubleshooting-on-ESXi-host/
+#
+# commands to get key and IP list
+#
+# kubectl vsphere login --server 192.168.3.80 --vsphere-username administrator@vsphere.local --tanzu-kubernetes-cluster-namespace namespace1000 --tanzu-kubernetes-cluster-name orfscluster --insecure-skip-tls-verify
+# kubectl config use-context namespace1000
+# kubectl get clusters
+# kubectl get virtualmachines -o wide
+#get IPs
+#kubectl get virtualmachines -o wide | tail -n +2 | awk '{ print $5 }'
+#
+#export NAMESPACE=namespace1000
+#get cluster
+#export cl=`kubectl get clusters | tail -n +2 | awk '{ print $1 }'`
+#
+#kubectl -n $NAMESPACE get secret $cl-ssh -o jsonpath='{.data.ssh-privatekey}' | base64 -d > test-cluster-ssh-key
+#chmod 600 test-cluster-ssh-key
+#
+declare -a list=(
+192.168.7.103
+192.168.7.110
+192.168.7.104
+192.168.7.107
+192.168.7.111
+192.168.7.105
+)
+line='--------------------------------------------------------'
+#
+for host in "${list[@]}"
+do 
+  echo $line
+  echo $host
+  echo $line
+  ssh -i test-cluster-ssh-key vmware-system-user@$host "timedatectl"  &
+done
+```
+
+Outcome: 
+```
+--------------------------------------------------------
+192.168.7.103
+--------------------------------------------------------
+--------------------------------------------------------
+192.168.7.110
+--------------------------------------------------------
+--------------------------------------------------------
+192.168.7.104
+--------------------------------------------------------
+--------------------------------------------------------
+192.168.7.107
+--------------------------------------------------------
+--------------------------------------------------------
+192.168.7.111
+--------------------------------------------------------
+--------------------------------------------------------
+192.168.7.105
+--------------------------------------------------------
+               Local time: Wed 2024-06-19 15:59:34 UTC
+           Universal time: Wed 2024-06-19 15:59:34 UTC
+                 RTC time: Wed 2024-06-19 15:59:34
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+               Local time: Wed 2024-06-19 15:59:34 UTC
+           Universal time: Wed 2024-06-19 15:59:34 UTC
+                 RTC time: Wed 2024-06-19 15:59:34
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+               Local time: Wed 2024-06-19 15:59:34 UTC
+           Universal time: Wed 2024-06-19 15:59:34 UTC
+                 RTC time: Wed 2024-06-19 15:59:34
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+               Local time: Wed 2024-06-19 15:59:34 UTC
+           Universal time: Wed 2024-06-19 15:59:34 UTC
+                 RTC time: Wed 2024-06-19 15:59:34
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+               Local time: Wed 2024-06-19 15:59:34 UTC
+           Universal time: Wed 2024-06-19 15:59:34 UTC
+                 RTC time: Wed 2024-06-19 15:59:34
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+/etc/bash.bashrc: line 43: TMOUT: readonly variable
+/etc/bash.bashrc: line 43: TMOUT: readonly variable
+               Local time: Wed 2024-06-19 15:59:35 UTC
+           Universal time: Wed 2024-06-19 15:59:35 UTC
+                 RTC time: Wed 2024-06-19 15:59:35
+                Time zone: UTC (UTC, +0000)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+```
 
 
 
